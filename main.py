@@ -25,9 +25,6 @@ def display(data, index):
     start = 0
     temp = 0
     stop = 40
-    # data2['วันที่'] = data[index][1].replace('วันที่', '').strip() if data[index][1] else ''
-    # data2['สัญญาเลขที่'] = data[index][start].replace('สัญญาเลขที่', '').strip()
-    # print(data2)
     for i in range(len(lst_content)):
         while start < stop:
             if lst_content[i] in data[index][start]:
@@ -43,7 +40,7 @@ def display(data, index):
                 elif i == 4:
                     data2['เครื่องรุ่น'] = [data[index][start].split(':')[1].strip()] if data[index][start] else ''
                 elif i == 5:
-                    data2['หมายเลขเครื่อง'] = [data[index][start].split(':')[1].strip()] if data[index][start] else ''
+                    data2['หมายเลขเครื่อง'] = [data[index][start].split(':')[1].strip()] if 'หมายเลขเครื่อง' in data[index][start] else ''
                 elif i == 6:
                     data2['จำนวน'] = [data[index][start].split(':')[1].strip()] if data[index][start] else ''
                 elif i == 7:
@@ -91,40 +88,18 @@ def display(data, index):
     return df
 
 
-# for i in range(len(lines)):
-#     display(lines[i], i)
-# print(data[index][2].strip())  # วันที่
-# print(data[index][3].strip())  # สัญญาเลขที่
-# print(data[index][5].strip())  # สัญญาฉบับนี้ทำขึ้นระหว่าง
-# print(data[index][7].strip())   # ผู้ให้เช่าตกลง
-# print(data[index][12].strip())   # ตู้รองเครื่อง
-# print(data[index][14].strip())   # สัญญานี้มีผลบังคับใช้เป็นเวลา
-# print(data[index][17].strip())   # วันที่ทำสัญญา
-# print(data[index][25].strip())   # ค่าเช่าเครื่องเดือนละ
-
-
-# display(lines, 0)
-# display(lines, 1)
-# display(lines, 2)
-
-
 lines = []
-# for i in range(4):
-#     i = 3
-#     file = open(f"file/copy{i+1}.txt", "r")
-#     lines.append(file.readlines())
-#     file.close()
-#     display(lines, i)
+def open_add(num):
+    file = open(f"file/copy{num}.txt", "r")
+    lines.append(file.readlines())
+    file.close()
+    df = display(lines, 0)
 
-# for i in range(len(lines)):
-#     print(i) if 'ค่าเช่าเครื่องเดือนละ' in lines[i] else None
-#
+    writer = pd.ExcelWriter(f'test{4}' + '.xlsx', engine='xlsxwriter')
+    df.to_excel(writer, sheet_name='FilterQuery', index=False)
+    writer.save()
 
-file = open(f"file/copy{4}.txt", "r")
-lines.append(file.readlines())
-file.close()
-df = display(lines, 0)
+open_add(1)
 
-writer = pd.ExcelWriter('test' + '.xlsx', engine='xlsxwriter')
-df.to_excel(writer, sheet_name='FilterQuery', index=False)
-writer.save()
+# for i in range(1,4):
+#     open_add(i)
