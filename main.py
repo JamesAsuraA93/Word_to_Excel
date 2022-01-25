@@ -19,9 +19,9 @@ from pprint import pprint
 def display(data, index):
     data2 = {}
     lst_content = ['วันที่', 'สัญญาเลขที่', 'สัญญาฉบับนี้ทำขึ้นระหว่าง', 'ผู้ให้เช่าตกลง', 'เครื่องรุ่น',
-                   'หมายเลขเครื่อง', 'จำนวน', 'สถานที่ตั้ง', 'ตู้รองเครื่อง', 'สัญญานี้มีผลบังคับใช้เป็นเวลา',
-                   'ค่าเช่าเครื่องเดือนละ', 'Fax', 'Printer', 'ถ่ายเอกสาร', 'คิดอัตราค่าบริการ', 'ถ่ายเอกสาร',
-                   'หักค่ากระดาษเสียให้ฟรีกับผู้เช่า', 'ค่าเงินประกันความเสียหาย']
+                   'หมายเลขเครื่อง', 'จำนวน', 'สถานที่ตั้ง', 'ตู้รองเครื่อง', 'สัญญานี้มีผลบังคับใช้เป็นเวลา']
+                   # 'ค่าเช่าเครื่องเดือนละ', 'Fax', 'Printer', 'ถ่ายเอกสาร', 'คิดอัตราค่าบริการ', 'ถ่ายเอกสาร',
+                   # 'หักค่ากระดาษเสียให้ฟรีกับผู้เช่า', 'ค่าเงินประกันความเสียหาย']
     start = 0
     temp = 0
     stop = 40
@@ -42,7 +42,7 @@ def display(data, index):
                 elif i == 5:
                     data2['หมายเลขเครื่อง'] = [data[index][start].split(':')[1].strip()] if 'หมายเลขเครื่อง' in data[index][start] else ''
                 elif i == 6:
-                    data2['จำนวน'] = [data[index][start].split(':')[1].strip()] if data[index][start] else ''
+                    data2['จำนวน'] = [int(data[index][start].split(':')[1].strip())] if data[index][start] else ''
                 elif i == 7:
                     data2['สถานที่ตั้ง'] = [data[index][start].split(':')[1].strip()] if data[index][start] else ''
                 elif i == 8:
@@ -51,27 +51,27 @@ def display(data, index):
                     data2['สัญญานี้มีผลบังคับใช้เป็นเวลา'] = [data[index][start].split('เวลา')[1].split('จนถึง')[
                         0].strip()] if data[index][start] else ''
                     data2['จนถึง'] = [data[index][start].split('เวลา')[1].split('จนถึง')[1].strip()] if data[index][start] else ''
-                elif i == 10:
-                    data2['ค่าเช่าเครื่องเดือนละ'] = [data[index][start].split('ค่าเช่าเครื่องเดือนละ')[1].strip()] if data[index][start] else ''
-                elif i == 11:
-                    data2['Fax'] = [data[index][start].split('=')[1]] if data[index][start] else ''
-                elif i == 12:
-                    data2['Printer'] = [data[index][start].split('=')[1]] if data[index][start] else ''
-                elif i == 13:
-                    data2['ถ่ายเอกสารฟรี(ขาวดำ)'] = [data[index][start].split('ฟรี')[1].split('ส่วนเกินตั้งแต่')[0]] if data[index][start] else ''
-                    data2['ส่วนเกินตั้งแต่(ขาวดำ)'] = [data[index][start].split('ฟรี')[1].split('ส่วนเกินตั้งแต่')[1]] if data[index][start] else ''
-                elif i == 14:
-                    data2['คิดอัตราค่าบริการ'] = [data[index][start].split('สำเนาละ')[1].strip()] if data[index][start] else ''
-                elif i == 15:
-                    data2['ถ่ายเอกสาร(สี)'] = [data[index][start].split('สี')[1].split('คิดอัตราค่าบริการ')[0]] if data[index][start] else ''
-                    data2['คิดอัตราค่าบริการ(สี)'] = [data[index][start].split('สี')[1].split('คิดอัตราค่าบริการ')[1]] if data[index][start] else ''
-                elif i == 16:
-                    data2['หักค่ากระดาษเสียให้ฟรีกับผู้เช่า'] = \
-                    [data[index][start].split('หักค่ากระดาษเสียให้ฟรีกับผู้เช่า')[1].split('%')[0].strip() + " %"] if data[index][start] else ''
-                elif i == 17:
-                    data2['ค่าเงินประกันความเสียหาย'] = \
-                    [data[index][start].split('ค่าเงินประกันความเสียหาย')[1].split('บาท')[0].strip()] if data[index][start] else ''
-                print(lst_content[i], ':', data[index][start].strip()) if data[index][start] else ''
+                # elif i == 10:
+                #     data2['ค่าเช่าเครื่องเดือนละ'] = [data[index][start].split('ค่าเช่าเครื่องเดือนละ')[1].strip()] if data[index][start] else ''
+                # elif i == 11:
+                #     data2['Fax'] = [data[index][start].split('=')[1]] if data[index][start] else ''
+                # elif i == 12:
+                #     data2['Printer'] = [data[index][start].split('=')[1]] if data[index][start] else ''
+                # elif i == 13:
+                #     data2['ถ่ายเอกสารฟรี(ขาวดำ)'] = [data[index][start].split('ฟรี')[1].split('ส่วนเกินตั้งแต่')[0]] if data[index][start] else ''
+                #     data2['ส่วนเกินตั้งแต่(ขาวดำ)'] = [data[index][start].split('ฟรี')[1].split('ส่วนเกินตั้งแต่')[1]] if data[index][start] else ''
+                # elif i == 14:
+                #     data2['คิดอัตราค่าบริการ'] = [data[index][start].split('สำเนาละ')[1].strip()] if data[index][start] else ''
+                # elif i == 15:
+                #     data2['ถ่ายเอกสาร(สี)'] = [data[index][start].split('สี')[1].split('คิดอัตราค่าบริการ')[0]] if data[index][start] else ''
+                #     data2['คิดอัตราค่าบริการ(สี)'] = [data[index][start].split('สี')[1].split('คิดอัตราค่าบริการ')[1]] if data[index][start] else ''
+                # elif i == 16:
+                #     data2['หักค่ากระดาษเสียให้ฟรีกับผู้เช่า'] = \
+                #     [data[index][start].split('หักค่ากระดาษเสียให้ฟรีกับผู้เช่า')[1].split('%')[0].strip() + " %"] if data[index][start] else ''
+                # elif i == 17:
+                #     data2['ค่าเงินประกันความเสียหาย'] = \
+                #     [data[index][start].split('ค่าเงินประกันความเสียหาย')[1].split('บาท')[0].strip()] if data[index][start] else ''
+                # print(lst_content[i], ':', data[index][start].strip()) if data[index][start] else ''
                 temp = start
                 start += 1
                 break
@@ -82,24 +82,30 @@ def display(data, index):
                 start += 1
         start = temp
     df = pd.DataFrame(data2)
-    print(data2)
-    print(df)
-    print('\n')
+    # print(data2)
+    # print(df)
     return df
 
 
-lines = []
+Merge = []
 def open_add(num):
+    lines = []
     file = open(f"file/copy{num}.txt", "r")
     lines.append(file.readlines())
     file.close()
     df = display(lines, 0)
+    Merge.append(df)
 
-    writer = pd.ExcelWriter(f'test{4}' + '.xlsx', engine='xlsxwriter')
+
+def write_Excel(df):
+    writer = pd.ExcelWriter(f'final' + '.xlsx', engine='xlsxwriter')
     df.to_excel(writer, sheet_name='FilterQuery', index=False)
     writer.save()
 
-open_add(1)
 
-# for i in range(1,4):
-#     open_add(i)
+for j in range(1,4):
+    open_add(j)
+
+save = pd.concat(Merge,ignore_index=True)
+
+write_Excel(save)
